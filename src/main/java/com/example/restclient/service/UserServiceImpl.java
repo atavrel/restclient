@@ -49,7 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity<User> getUserByEmail(String email) {
-        User user = null;
+        User user;
         try {
             user =  restTemplate.getForObject("http://localhost:8075/api/users/email/" + email, User.class);
         } catch (HttpClientErrorException e){
@@ -64,13 +64,12 @@ public class UserServiceImpl implements UserService {
         if (user.getRoles().isEmpty()) {
             user.getRoles().add(new Role(1L, "USER"));
         }
-        ResponseEntity<User> responseEntity = null;
         try {
-            responseEntity = restTemplate.postForEntity("http://localhost:8075/api/users", user, User.class);
+            user = restTemplate.postForObject("http://localhost:8075/api/users", user, User.class);
         } catch (HttpClientErrorException exception) {
-            System.err.println(exception.getMessage());
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
-        return responseEntity;
+        return new ResponseEntity<>(user, HttpStatus.CREATED);
     }
 
     @Override
