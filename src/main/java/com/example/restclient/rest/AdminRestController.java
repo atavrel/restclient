@@ -48,8 +48,8 @@ public class AdminRestController {
     }
 
     @PostMapping(value = "/users")
-    public void addUser(@RequestBody User user) {
-        userService.add(user);
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        return userService.add(user);
     }
 
     @PutMapping("/users")

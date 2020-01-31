@@ -20,7 +20,7 @@ public class RoleServiceImpl implements RoleService {
         this.restTemplate = restTemplate;
     }
 
-    @Override // экспериментально, проверить
+    @Override
     public List<Role> getAll() {
         ResponseEntity<Role[]> responseEntity = restTemplate.getForEntity("http://localhost:8075/api/roles", Role[].class);
         List<Role> roles = null;
