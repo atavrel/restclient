@@ -18,7 +18,7 @@ public class RegistrationRestController {
     }
 
     @GetMapping(value = "/email/{email}")
-    public User getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
 

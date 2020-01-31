@@ -11,7 +11,7 @@ public interface UserService {
 
     List<User> getAll();
 
-    User getUserByEmail(String email);
+    ResponseEntity<User> getUserByEmail(String email);
 
     ResponseEntity<User> add(User user);
 

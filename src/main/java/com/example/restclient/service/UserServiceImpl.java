@@ -5,6 +5,7 @@ import com.example.restclient.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -47,8 +48,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String email) {
-        return restTemplate.getForObject("http://localhost:8075/api/users/email/" + email, User.class);
+    public ResponseEntity<User> getUserByEmail(String email) {
+        User user = null;
+        try {
+            user =  restTemplate.getForObject("http://localhost:8075/api/users/email/" + email, User.class);
+        } catch (HttpClientErrorException e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
     @Override

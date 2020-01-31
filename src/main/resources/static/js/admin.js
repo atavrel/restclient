@@ -13,7 +13,6 @@ document.getElementById('addUserPanel').onclick = function (e) {
 };
 
 // script for adding users
-
 document.getElementById('submitAddUser').onclick = function (e) {
     e.preventDefault();
     if (validateForm()) {

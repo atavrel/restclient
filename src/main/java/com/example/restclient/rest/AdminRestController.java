@@ -5,6 +5,7 @@ import com.example.restclient.model.User;
 import com.example.restclient.service.RoleService;
 import com.example.restclient.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -42,7 +43,7 @@ public class AdminRestController {
     }
 
     @GetMapping(value = "/users/email/{email}")
-    public User getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
 

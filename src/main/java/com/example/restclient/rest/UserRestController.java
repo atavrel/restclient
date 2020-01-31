@@ -3,6 +3,7 @@ package com.example.restclient.rest;
 import com.example.restclient.model.User;
 import com.example.restclient.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,7 +21,7 @@ public class UserRestController {
     }
 
     @GetMapping(value = "/email/{email}")
-    public User getUserByEmail(@PathVariable String email) {
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
         return userService.getUserByEmail(email);
     }
 }
